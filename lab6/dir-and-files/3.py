@@ -1,14 +1,21 @@
 import os
 
-def check_path(path):
-    if os.path.exists(path):
-        directory, filename = os.path.split(path)
-        print(f"Путь существует.")
-        print(f"Каталог: {directory}")
-        print(f"Имя файла: {filename}")
+path = input("Enter the path: ")
+if os.path.exists(path):
+    print("Path exists")
+    directory, filename =os.path.split(path)
+    if os.path.isdir(path):
+        print('It is a directory')
+    elif os.path.isfile(path):
+        print('It is a file')
+    if directory:
+        print("Directory:", directory)
     else:
-        print("Путь не существует.")
+        print("This is a root directory")
 
-# Пример использования
-path = input("Введите путь: ")
-check_path(path)
+    if filename:
+        print("Filename:", filename)
+    else:
+        print("No filename (this is a directory)")
+else:
+    print("Path does not exist")
