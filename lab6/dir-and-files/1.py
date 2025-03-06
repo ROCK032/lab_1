@@ -1,18 +1,31 @@
 import os
 
-def list_directories(path):
-    return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
+folder_path = input("Enter the folder path: ")
 
-def list_files(path):
-    return [f for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+if os.path.isdir(folder_path):
+    directories = []
+    files = []
 
-def list_all(path):
-    return os.listdir(path)
-if __name__ == "__main__":
-    path = input("Enter the directory path: ")
-    if os.path.exists(path) and os.path.isdir(path):
-        print("\nDirectories:", list_directories(path))
-        print("\nFiles:", list_files(path))
-        print("\nAll Directories and Files:", list_all(path))
+    for i in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, i)
+        if os.path.isdir(item_path): 
+            directories.append(i)
+        elif os.path.isfile(item_path):
+            files.append(i)
+
+    print('\nDirectories:')
+    if directories:
+        print("\n".join(directories))
     else:
-        print("Invalid Directory Path")
+        print('No directories')
+
+    print('\nFiles:')
+    if files:
+        print('\n'.join(files))
+    else:
+        print('No files')
+
+    print('\nContent folders:')
+    print('\n'.join(os.listdir(folder_path)))
+else:
+    print("Incorrect path")
