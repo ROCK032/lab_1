@@ -1,16 +1,15 @@
-def copy_file():
-    source_file = input("Введите путь к исходному файлу: ")
-    destination_file = input("Введите путь к файлу назначения: ")
+import shutil
 
-    try:
-        with open(source_file, 'r', encoding='utf-8') as src:
-            with open(destination_file, 'w', encoding='utf-8') as dest:
-                dest.write(src.read())
-        print("Файл успешно скопирован.")
-    except FileNotFoundError:
-        print("Ошибка: исходный файл не найден.")
-    except Exception as e:
-        print(f"Ошибка: {e}")
+source = input("Enter the source file path: ")
+destination = input("Enter the destination file path: ")
 
+try:
+    shutil.copyfile(source, destination)
+    print("File copied successfully.")
+except FileNotFoundError:
+    print("Error: Source file not found.")
+except PermissionError:
+    print("Error: Permission denied.")
+except Exception as e:
+    print(f"An error occurred: {e}")
 
-copy_file()
