@@ -1,7 +1,15 @@
-my_list = ["apple", "banana", "cherry"]
+import os
 
-with open("myfile.txt", "a", encoding="utf-8") as f:
-    for item in my_list:
-        f.write(item + "\n")
+file_path = input("Enter the file path\n")
 
-print("Список успешно записан в файл.")
+data = ["Apple", "Banana", "Chery", "Date", "Elderberry"]
+
+try:
+    with open(file_path, 'w') as file:
+        for i in data:
+            file.write(i + "\n")
+        print("Data successfully written to the file.")
+except FileNotFoundError:
+    print("File not found.")
+except Exception as e:
+    print("An error occurred:", e)
