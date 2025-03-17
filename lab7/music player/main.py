@@ -59,7 +59,6 @@ while running:
 
     pygame.display.flip()
 
-    # Обработка событий
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
