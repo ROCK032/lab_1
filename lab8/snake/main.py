@@ -10,10 +10,12 @@ font = pygame.font.Font(None, 36)
 
 Cell_Size  = 20
 
-def random_food():
-    x = random.randint(0, (W - Cell_Size) // Cell_Size) * Cell_Size
-    y = random.randint(0, (H - Cell_Size) // Cell_Size) * Cell_Size
-    return x, y
+def random_food(snake):
+    while True:
+        x = random.randint(0, (W - Cell_Size) // Cell_Size) * Cell_Size
+        y = random.randint(0, (H - Cell_Size) // Cell_Size) * Cell_Size
+        if (x, y) not in snake:
+            return x, y
 def game_over_screen(score, level):
     screen.fill((0,0,0))
     text = font.render(f'Game Over! Score: {score}, Level : {level}', True, (255, 255,255))
@@ -35,7 +37,7 @@ def game_over_screen(score, level):
 def game_loop():
     snake = [(W // 2, H // 2)]
     dx, dy = Cell_Size, 0
-    food = random_food()
+    food = random_food(snake)
     score = 0
     level = 1
     speed = 10
@@ -66,7 +68,7 @@ def game_loop():
             running = False
         snake.insert(0, new_head)
         if new_head == food:
-            food = random_food()
+            food = random_food(snake)
             score += 10
             food_eaten += 1
             if food_eaten % 3 == 0:
